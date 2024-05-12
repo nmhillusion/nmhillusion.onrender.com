@@ -22,11 +22,8 @@ router.post("/update", upload.single("upload_file"), (req, res) => {
   console.log("headers = ", req.headers);
 
   let checkAuthorization = false;
-  if (req.header("client-id") === "raccoon-scheduler-image") {
-    if (
-      req.header("client-secret") ===
-      "raccoon-scheduler#~Y9X(l&=>,;WC--.:m]#VvqCommon775"
-    ) {
+  if (req.header("client-id") === process.env["CLIENT_ID"]) {
+    if (req.header("client-secret") === process.env["CLIENT_SECRET"]) {
       checkAuthorization = true;
     }
   }

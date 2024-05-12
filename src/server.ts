@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   });
 // });
 app.get("/", (request, response) => {
+  console.log("Env = ", process.env);
   response.send("server Ok");
 });
 

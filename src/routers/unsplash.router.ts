@@ -2,6 +2,9 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import { UnsplashService } from "../services/unsplash.service.js";
+
+const unsplashAccessToken = process.env["UNSPLASH_ACCESS_TOKEN"];
 
 export const router = express.Router();
 
@@ -77,4 +80,28 @@ router.post("/update", upload.single("upload_file"), (req, res) => {
     res.status(400);
     res.send("Cannot determine upload file");
   }
+});
+
+router.get("/update", (req, res) => {
+  console.log("Unsplash Service:: GET /update");
+  if (!unsplashAccessToken) {
+    res.status(500);
+    res.send("Unsplash Service:: Access token is not set");
+    return;
+  }
+
+  const unsplashService = new UnsplashService(unsplashAccessToken);
+
+  unsplashService
+    .getRandomImageInfo()
+    .then((res_) => {
+      res.status(200);
+      res.send(res_);
+    })
+    .catch((error_) => {
+      console.error("Error: ", error_);
+
+      res.status(400);
+      res.send(error_);
+    });
 });

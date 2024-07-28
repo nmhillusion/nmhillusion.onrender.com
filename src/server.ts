@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { router as duolingoRouter } from "./routers/duolingo.router.js";
 import { router as unsplashRouter } from "./routers/unsplash.router.js";
+import { router as adb2cRouter } from "./routers/adb2c.router.js";
 import http from "http";
 import path from "path";
 
@@ -26,6 +27,8 @@ app.get("/", (request, response) => {
 app.use("/duolingo", duolingoRouter);
 
 app.use("/unsplash", unsplashRouter);
+
+app.use("/adb2c", adb2cRouter);
 
 app.use("/static", express.static(path.join(process.cwd(), "static")));
 

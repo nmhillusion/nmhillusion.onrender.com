@@ -1,0 +1,12 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title View content - #{contentId}
+    link(rel="shortcut icon", href="/static/editico/favicon.png", type="image/png")
+  body
+    h1 View content ID: #{contentId}
+    a(href="/editico", style="background: #ccc; color: #333; padding: 10px; border-radius: 5px; margin: 10px 0; text-decoration: none;") &lt; Go Back
+    textarea.content-container(style="width: 100%; height: 90vh;" readonly=true)
+      != content

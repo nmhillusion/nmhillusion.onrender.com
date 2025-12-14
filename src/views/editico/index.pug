@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/static/editico/style.css")
+    link(rel="shortcut icon", href="/static/editico/favicon.png", type="image/png")
+  body
+    h1= title
+    p= message
+    .action-box
+      .reload-box
+        input(type="text" placeholder="ID to reload" id="content-id")
+        button#btn-reload.btn-reload Reload Content
+      .horizontal-line
+      button#btn-save.btn-save Save Content
+
+    .message-panel-container
+      p#message-panel
+    .editor-container
+      textarea.editor#editor
+    script(src='/static/editico/main.js')

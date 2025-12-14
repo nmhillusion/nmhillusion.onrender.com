@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import { router as duolingoRouter } from "./routers/duolingo.router.js";
 import { router as unsplashRouter } from "./routers/unsplash.router.js";
 import { router as adb2cRouter } from "./routers/adb2c.router.js";
+import { router as editicoRouter } from "./routers/editico.router.js";
 import http from "http";
 import path from "path";
 
@@ -13,15 +14,12 @@ const server = http.createServer(app);
 app.use(bodyParser.json({ type: "application/json" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Main page
-// app.get("/", async (_request, response) => {
-//   response.json({
-//     data: "hello world, now: " + new Date().toISOString(),
-//   });
-// });
+// Set up Pug as the template engine
+app.set("view engine", "pug");
+app.set("views", path.join(process.cwd(), "src", "views"));
+
 app.get("/", (request, response) => {
-  console.log("Env = ", process.env);
-  response.send("server Ok");
+  response.render("index", { title: "Home 2", message: "Hello from Pug!" });
 });
 
 app.use("/duolingo", duolingoRouter);
@@ -29,6 +27,8 @@ app.use("/duolingo", duolingoRouter);
 app.use("/unsplash", unsplashRouter);
 
 app.use("/adb2c", adb2cRouter);
+
+app.use("/editico", editicoRouter);
 
 app.use("/static", express.static(path.join(process.cwd(), "static")));
 
